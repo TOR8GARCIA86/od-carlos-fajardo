@@ -442,6 +442,7 @@
       align-items: center;
       overflow: hidden;
       background: var(--black);
+      padding: 0 !important;
     }
     .hero-bg {
       display: none; /* el panel de media es full-bleed — este fondo ya no aplica */
@@ -1620,6 +1621,7 @@
       #hero { height: 100vh; min-height: 700px; flex-direction: row; align-items: center; }
       .hero-media-panel { position: absolute; inset: 0; width: 100%; height: 100%; max-height: none; order: 0; }
       .hero-media-overlay { background: linear-gradient(to right, #1D1D1B 0%, rgba(29,29,27,0.82) 12%, transparent 35%); }
+      .hero-content { background: transparent; }
       .hero-particles { display: block; }
       .hero-line-left, .hero-line-right { display: block; }
       .hero-badge-v2 { display: flex; }
