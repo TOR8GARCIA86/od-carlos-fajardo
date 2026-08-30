@@ -646,8 +646,7 @@
     .hero-scroll {
       position: absolute;
       bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
+      right: 40px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -667,8 +666,8 @@
       background: linear-gradient(to bottom, rgba(201,169,110,0.6), transparent);
     }
     @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(6px); }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
     }
 
     /* ─── STATS BAR ─── */
@@ -2775,7 +2774,7 @@
         <!-- Programat S2 -->
         <article class="equipo-tech-card fade-up delay-3">
           <div class="equipo-tech-photo">
-            <img src="assets/Programat-S2-Ivoclar.jpg" alt="Horno de sinterización Programat S2 Ivoclar — Clínica SIMEB Bogotá" width="400" height="300" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <img src="assets/Programat-S2-Ivoclar.jpg" alt="Horno de sinterización Programat S2 Ivoclar — Clínica SIMEB Bogotá" width="400" height="300" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;background:#f0f4f8;">
           </div>
           <div class="equipo-tech-body">
             <h3>Programat S2 · Ivoclar</h3>
