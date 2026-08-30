@@ -1834,28 +1834,19 @@
 
     /* Grid bento de fotos — layout editorial */
     .gallery-bento {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto;
-      gap: 6px;
-    }
-    @media (min-width: 1025px) {
-      .gallery-bento {
-        grid-template-columns: 2fr 1fr 1fr;
-        grid-template-rows: 340px 260px;
-      }
+      display: block;
+      width: 100%;
     }
     .gallery-item {
       overflow: hidden;
       position: relative;
       cursor: pointer;
       background: var(--dark2);
+      width: 100%;
+      height: 520px;
     }
-    /* Item principal ocupa 2 filas en desktop */
-    @media (min-width: 1025px) {
-      .gallery-item--main {
-        grid-row: 1 / 3;
-      }
+    @media (max-width: 768px) {
+      .gallery-item { height: 280px; }
     }
     .gallery-item img {
       width: 100%;
@@ -1863,7 +1854,6 @@
       object-fit: cover;
       display: block;
       transition: transform 0.5s ease;
-      min-height: 200px;
     }
     .gallery-item:hover img { transform: scale(1.05); }
     .gallery-item-label {
@@ -2258,7 +2248,7 @@
       <picture>
         <source media="(min-width: 769px)" srcset="assets/Dr-Fajardo-hero-pc.jpg">
         <img class="hero-slide hero-slide--active"
-          src="assets/Dr Fajardo julio-131.jpg"
+          src="assets/Dr-Fajardo-hero-movil.jpg"
           alt="OD. Carlos Eduardo Fajardo Escolar — Rehabilitador oral, director de la Clínica SIMEB en Bogotá Colombia"
           width="800" height="1080"
           fetchpriority="high" loading="eager" decoding="sync"
