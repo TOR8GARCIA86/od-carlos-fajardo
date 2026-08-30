@@ -297,17 +297,13 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center center;
+      object-position: 65% center;
       display: block;
-      transform: scale(1.0);
+      transform: none;
       opacity: 0;
-      transition: opacity 1.5s ease, transform 7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      will-change: transform, opacity;
+      transition: opacity 1.5s ease;
     }
-    /* Hero1 — encuadre del doctor */
-    .hero-slide:nth-child(1) { transform: scale(1.25) translateX(15%); }
-    /* Hero — imagen completa corrida 300px a la izquierda */
-    .hero-slide:nth-child(2) { transform: translateX(-300px); object-fit: contain; object-position: center center; }
+    .hero-slide:nth-child(2) { object-fit: contain; object-position: center center; }
     .hero-slide--active { opacity: 1; }
     .hero-media-panel img,
     .hero-media-panel video {
@@ -316,15 +312,6 @@
       object-fit: cover;
       object-position: center center;
       display: block;
-      transform: scale(1.25) translateX(15%);
-      transition: transform 7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      will-change: transform;
-    }
-
-    /* Zoom milimétrico en hover — imperceptible pero lujoso */
-    #hero:hover .hero-media-panel img,
-    #hero:hover .hero-media-panel video {
-      transform: scale(1.3) translateX(15%);
     }
 
     /* Overlay multi-capa — full-bleed, texto siempre legible */
@@ -492,13 +479,13 @@
       margin: 0 auto;
       padding: 0 60px;
       display: grid;
-      grid-template-columns: 55fr 45fr;
+      grid-template-columns: 40fr 60fr;
       gap: 0;
       align-items: center;
       width: 100%;
     }
     .hero-left {
-      padding-right: 60px;    /* aire entre texto y zona de imagen */
+      max-width: 520px;
     }
     .hero-tag {
       display: inline-flex;
@@ -1530,7 +1517,7 @@
 
     /* Hero móvil: imagen arriba, texto abajo */
     /* Imagen: centrar al doctor en mobile (quita el desplazamiento desktop) */
-    .hero-slide:nth-child(1) { transform: scale(1.1); object-position: 20% 90%; }
+    .hero-slide:nth-child(1) { transform: none; object-position: left 85%; }
     /* Navbar: franja oscura para que el logo sea legible sobre la imagen */
     nav { background: linear-gradient(to bottom, rgba(29,29,27,0.85) 0%, transparent 100%) !important; }
     #hero {
@@ -2268,12 +2255,15 @@
          El overlay y el badge funcionan igual sin tocar nada más.
     ══ -->
     <div class="hero-media-panel">
-      <img class="hero-slide hero-slide--active"
-        src="assets/Hero1.png"
-        alt="OD. Carlos Eduardo Fajardo Escolar — Rehabilitador oral, director de la Clínica SIMEB en Bogotá Colombia"
-        width="800" height="1080"
-        fetchpriority="high" loading="eager" decoding="sync"
-      >
+      <picture>
+        <source media="(min-width: 769px)" srcset="assets/Dr-Fajardo-hero-pc.jpg">
+        <img class="hero-slide hero-slide--active"
+          src="assets/Dr Fajardo julio-131.jpg"
+          alt="OD. Carlos Eduardo Fajardo Escolar — Rehabilitador oral, director de la Clínica SIMEB en Bogotá Colombia"
+          width="800" height="1080"
+          fetchpriority="high" loading="eager" decoding="sync"
+        >
+      </picture>
       <div class="hero-media-overlay"></div>
     </div>
 
@@ -2548,29 +2538,25 @@
     </div>
   </section>
 
-  <!-- ─── EQUIPO FUNDADOR ─── -->
-  <section id="equipo" aria-label="Equipo Fundador SIMEB">
+  <!-- ─── DIRECTOR ─── -->
+  <section id="equipo" aria-label="Director SIMEB — OD. Carlos Fajardo">
     <div class="section-inner">
       <div class="section-tag fade-up">
-
-        <span class="section-tag-text">Nuestro Equipo</span>
+        <span class="section-tag-line"></span>
+        <span class="section-tag-text">El Director</span>
       </div>
       <h2 class="section-title fade-up">
-        Los especialistas detrás de<br>
-        cada <em>sonrisa perfecta</em>
+        Excelencia clínica liderada<br>
+        por un <em>especialista de vocación</em>
       </h2>
-      <p class="section-desc fade-up">
-        Un equipo de odontólogos especialistas con formación internacional, unidos por la misma filosofía: excelencia clínica, tecnología de vanguardia y trato humano excepcional.
-      </p>
 
-      <div class="equipo-grid">
+      <div style="display:grid; grid-template-columns:380px 1fr; gap:70px; align-items:center; margin-top:60px;">
 
-        <!-- ── CARD 1: OD. Carlos Eduardo Fajardo Escolar (Director) ── -->
-        <article class="team-card fade-up" itemscope itemtype="https://schema.org/Person">
+        <article class="team-card fade-up" itemscope itemtype="https://schema.org/Person" style="border-bottom:2px solid var(--gold);">
           <div class="team-card-photo">
             <img
               src="assets/Carlos especialista.jpg"
-              alt="OD. Carlos Eduardo Fajardo Escolar — Rehabilitador Oral, Director de SIMEB"
+              alt="OD. Carlos Eduardo Fajardo Escolar — Rehabilitador Oral, Director de SIMEB Bogotá"
               width="400" height="533"
               loading="lazy" decoding="async"
               style="width:100%; height:100%; object-fit:cover; object-position:top center; display:block;"
@@ -2589,52 +2575,32 @@
           </div>
         </article>
 
-        <!-- ── CARD 2: Co-Fundadores — Dr. Carlos Arturo Fajardo & Dra. Marbeluz Escolar Borrero ── -->
-        <article class="team-card fade-up delay-1">
-          <div class="team-card-photo">
-            <div class="img-placeholder" style="aspect-ratio:3/4">
-              <svg class="img-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-              </svg>
-              <span class="img-placeholder-label">Dr. Carlos Arturo Fajardo<br>& Dra. Marbeluz Escolar Borrero<br>Co-Fundadores SIMEB · 1987</span>
-              <span class="img-placeholder-dim">400 × 533 px</span>
+        <div class="fade-up delay-1">
+          <p class="section-desc" style="margin-bottom:28px;">
+            Egresado de la <strong style="color:rgba(255,255,255,0.85);">Pontificia Universidad Javeriana</strong> y profesor activo de la <strong style="color:rgba(255,255,255,0.85);">Universidad El Bosque</strong>, el OD. Carlos Fajardo combina una formación académica rigurosa con más de una década de práctica clínica de alto nivel.
+          </p>
+          <p class="section-desc" style="margin-bottom:40px;">
+            Heredero del legado de <strong style="color:rgba(255,255,255,0.85);">SIMEB</strong> — clínica fundada en 1987 por sus padres — lidera hoy una nueva etapa de la institución con tecnología de vanguardia, un enfoque centrado en la función y una estética que es el resultado natural de un trabajo clínico impecable.
+          </p>
+          <div style="display:flex; flex-wrap:wrap; gap:16px;">
+            <div class="award-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <span>Pontificia Universidad Javeriana</span>
             </div>
-            <div class="team-card-overlay"></div>
-          </div>
-          <div class="team-card-body">
-            <span class="team-card-role">Co-Fundadores SIMEB · 1987</span>
-            <h3 class="team-card-name">Dr. Carlos Arturo Fajardo<br>&amp; Dra. Marbeluz Escolar Borrero</h3>
-            <p class="team-card-bio">Fundadores de SIMEB en 1987. Juntos construyeron durante más de tres décadas una de las clínicas odontológicas más longevas y reconocidas de Bogotá. Su legado de ética, excelencia clínica y amor por la profesión es el ADN de la institución.</p>
-            <div class="team-card-spec">
-              <span class="spec-tag">Fundadores 1987</span>
-              <span class="spec-tag">Rehabilitación Oral</span>
-              <span class="spec-tag">38 Años de Trayectoria</span>
+            <div class="award-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              <span>Docente Universidad El Bosque</span>
             </div>
-          </div>
-        </article>
-
-        <!-- ── CARD 3: Especialista adicional ── -->
-        <article class="team-card fade-up delay-2" itemscope itemtype="https://schema.org/Person">
-          <div class="team-card-photo">
-            <div class="img-placeholder" style="aspect-ratio:3/4">
-              <svg class="img-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-              </svg>
-              <span class="img-placeholder-label">Foto Especialista<br>del Equipo #3</span>
-              <span class="img-placeholder-dim">400 × 533 px</span>
+            <div class="award-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+              <span>38 Años de Historia Clínica</span>
             </div>
-            <div class="team-card-overlay"></div>
-          </div>
-          <div class="team-card-body">
-            <span class="team-card-role">Especialista Endodoncia</span>
-            <h3 class="team-card-name">[Nombre del especialista]</h3>
-            <p class="team-card-bio">Endodoncista con más de 15 años de experiencia. Especialista en tratamientos de conductos sin dolor y rehabilitación post-endodóntica avanzada.</p>
-            <div class="team-card-spec">
-              <span class="spec-tag">Endodoncia</span>
-              <span class="spec-tag">Sin Dolor</span>
+            <div class="award-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span>+5.000 Pacientes Atendidos</span>
             </div>
           </div>
-        </article>
+        </div>
 
       </div>
     </div>
@@ -2740,70 +2706,18 @@
       -->
       <div class="gallery-bento fade-up">
 
-        <!-- FOTO 1 — Principal: Recepción / Sala de espera -->
+        <!-- FOTO 1 — Principal: Clínica SIMEB -->
         <div class="gallery-item gallery-item--main">
-          <div class="img-placeholder" style="height:100%;min-height:340px;">
-            <svg class="img-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-              <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
-            </svg>
-            <span class="img-placeholder-label">Recepción & Sala de Espera<br>SIMEB</span>
-            <span class="img-placeholder-dim">800 × 900 px — Foto principal</span>
-          </div>
-          <!-- Reemplazar con: <img src="/images/instalaciones/recepcion-simeb.jpg" alt="Recepción y sala de espera de la clínica SIMEB en Bogotá — diseño premium" width="800" height="900" loading="lazy" decoding="async"> -->
-          <div class="gallery-item-label"><span>Recepción · SIMEB</span></div>
+          <img
+            src="assets/Clinica-fachada.jpeg"
+            alt="Fachada de la Clínica SIMEB en Bogotá — odontología estética premium"
+            width="800" height="900"
+            loading="lazy" decoding="async"
+            style="width:100%; height:100%; object-fit:cover; display:block;"
+          >
+          <div class="gallery-item-label"><span>Clínica SIMEB · Bogotá</span></div>
         </div>
 
-        <!-- FOTO 2 — Sillón dental -->
-        <div class="gallery-item">
-          <div class="img-placeholder" style="height:100%;min-height:190px;">
-            <svg class="img-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-              <path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M12 7V4M8 7V5M16 7V5"/>
-            </svg>
-            <span class="img-placeholder-label">Sillón Dental<br>de Última Generación</span>
-            <span class="img-placeholder-dim">560 × 340 px</span>
-          </div>
-          <!-- <img src="/images/instalaciones/sillon-dental.jpg" alt="Sillón dental de última generación en clínica SIMEB Bogotá" width="560" height="340" loading="lazy" decoding="async"> -->
-          <div class="gallery-item-label"><span>Sillón Premium</span></div>
-        </div>
-
-        <!-- FOTO 3 — Zona técnica -->
-        <div class="gallery-item">
-          <div class="img-placeholder" style="height:100%;min-height:190px;">
-            <svg class="img-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-              <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/>
-            </svg>
-            <span class="img-placeholder-label">Zona de Esterilización<br>Protocolo ISO</span>
-            <span class="img-placeholder-dim">560 × 340 px</span>
-          </div>
-          <!-- <img src="/images/instalaciones/esterilizacion.jpg" alt="Zona de esterilización con protocolo ISO en clínica SIMEB" width="560" height="340" loading="lazy" decoding="async"> -->
-          <div class="gallery-item-label"><span>Protocolo de Higiene</span></div>
-        </div>
-
-        <!-- FOTO 4 — Pasillo / diseño interior -->
-        <div class="gallery-item">
-          <div class="img-placeholder" style="height:100%;min-height:160px;">
-            <svg class="img-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
-            </svg>
-            <span class="img-placeholder-label">Diseño Interior<br>Pasillo Clínica</span>
-            <span class="img-placeholder-dim">560 × 260 px</span>
-          </div>
-          <!-- <img src="/images/instalaciones/pasillo.jpg" alt="Diseño interior del pasillo de la clínica SIMEB Bogotá" width="560" height="260" loading="lazy" decoding="async"> -->
-          <div class="gallery-item-label"><span>Diseño Interior</span></div>
-        </div>
-
-        <!-- FOTO 5 — Consultorio privado -->
-        <div class="gallery-item">
-          <div class="img-placeholder" style="height:100%;min-height:160px;">
-            <svg class="img-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-              <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
-            </svg>
-            <span class="img-placeholder-label">Consultorio Privado<br>Box Dental</span>
-            <span class="img-placeholder-dim">560 × 260 px</span>
-          </div>
-          <!-- <img src="/images/instalaciones/consultorio.jpg" alt="Consultorio privado con equipo dental de alta tecnología — SIMEB Bogotá" width="560" height="260" loading="lazy" decoding="async"> -->
-          <div class="gallery-item-label"><span>Box Privado</span></div>
-        </div>
 
       </div><!-- /gallery-bento -->
 
@@ -2835,71 +2749,47 @@
       -->
       <div class="equipo-tech-grid">
 
+        <!-- PrograMill PM7 -->
         <article class="equipo-tech-card fade-up">
           <div class="equipo-tech-photo">
-            <div class="img-placeholder" style="aspect-ratio:4/3">
-              <svg class="img-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-                <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
-              </svg>
-              <span class="img-placeholder-label">Software DSD<br>Digital Smile Design</span>
-              <span class="img-placeholder-dim">800 × 600 px</span>
-            </div>
-            <!-- <img src="/images/equipos/equipo-dsd-monitor.jpg" alt="Software Digital Smile Design DSD en clínica SIMEB Bogotá" width="400" height="300" loading="lazy" decoding="async"> -->
+            <img src="assets/PrograMill-PM7-Ivoclar.png" alt="Fresadora CAD/CAM PrograMill PM7 Ivoclar — Clínica SIMEB Bogotá" width="400" height="300" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;">
           </div>
           <div class="equipo-tech-body">
-            <h3>Diseño Digital 3D</h3>
-            <p>Software DSD para planificar y visualizar la sonrisa final antes de comenzar cualquier tratamiento. Certeza total desde el primer día.</p>
+            <h3>PrograMill PM7 · Ivoclar</h3>
+            <p>Fresadora CAD/CAM de 5 ejes con precisión de ±5 µm. Fabrica coronas, carillas e inlays de IPS e.max el mismo día de la cita, sin laboratorio externo.</p>
           </div>
         </article>
 
+        <!-- TRIOS Core -->
         <article class="equipo-tech-card fade-up delay-1">
           <div class="equipo-tech-photo">
-            <div class="img-placeholder" style="aspect-ratio:4/3">
-              <svg class="img-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/>
-              </svg>
-              <span class="img-placeholder-label">Escáner Intraoral<br>3D Digital</span>
-              <span class="img-placeholder-dim">800 × 600 px</span>
-            </div>
-            <!-- <img src="/images/equipos/equipo-scanner-intraoral.jpg" alt="Escáner intraoral 3D digital en clínica SIMEB Bogotá" width="400" height="300" loading="lazy" decoding="async"> -->
+            <img src="assets/TRIOS-Core-3Shape.avif" alt="Escáner intraoral TRIOS Core 3Shape — Clínica SIMEB Bogotá" width="400" height="300" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;">
           </div>
           <div class="equipo-tech-body">
-            <h3>Escáner Intraoral</h3>
-            <p>Impresiones digitales sin material ni molestia. Mayor precisión, registros en segundos y resultados más predecibles para el paciente.</p>
+            <h3>TRIOS Core · 3Shape</h3>
+            <p>Escáner intraoral sin polvo con captura de color en tiempo real. Impresiones digitales ultra-precisas en segundos para un flujo de trabajo 100% digital.</p>
           </div>
         </article>
 
+        <!-- Programat P510 -->
         <article class="equipo-tech-card fade-up delay-2">
           <div class="equipo-tech-photo">
-            <div class="img-placeholder" style="aspect-ratio:4/3">
-              <svg class="img-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-              </svg>
-              <span class="img-placeholder-label">Tomógrafo<br>CBCT 3D</span>
-              <span class="img-placeholder-dim">800 × 600 px</span>
-            </div>
-            <!-- <img src="/images/equipos/equipo-tomografo-cbct.jpg" alt="Tomógrafo CBCT 3D para planificación de implantes en SIMEB Bogotá" width="400" height="300" loading="lazy" decoding="async"> -->
+            <img src="assets/P510_Front_PS.jpg" alt="Horno de cerámica Programat P510 Ivoclar — Clínica SIMEB Bogotá" width="400" height="300" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;">
           </div>
           <div class="equipo-tech-body">
-            <h3>Tomografía CBCT 3D</h3>
-            <p>Imágenes tridimensionales de alta resolución para la planificación quirúrgica de implantes con precisión milimétrica absoluta.</p>
+            <h3>Programat P510 · Ivoclar</h3>
+            <p>Horno de sinterización y cristalización de IPS e.max con hasta 950 °C. Garantiza la resistencia, translucidez y estética final de cada restauración cerámica.</p>
           </div>
         </article>
 
+        <!-- Programat S2 -->
         <article class="equipo-tech-card fade-up delay-3">
           <div class="equipo-tech-photo">
-            <div class="img-placeholder" style="aspect-ratio:4/3">
-              <svg class="img-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-              </svg>
-              <span class="img-placeholder-label">Fresadora CAD/CAM<br>Cerámica en Clínica</span>
-              <span class="img-placeholder-dim">800 × 600 px</span>
-            </div>
-            <!-- <img src="/images/equipos/equipo-cadcam-fresadora.jpg" alt="Sistema CAD/CAM para fabricación de coronas y carillas en el día — SIMEB Bogotá" width="400" height="300" loading="lazy" decoding="async"> -->
+            <img src="assets/Programat-S2-Ivoclar.jpg" alt="Horno de sinterización Programat S2 Ivoclar — Clínica SIMEB Bogotá" width="400" height="300" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;">
           </div>
           <div class="equipo-tech-body">
-            <h3>CAD/CAM en Clínica</h3>
-            <p>Fabricamos coronas, carillas e inlays de cerámica el mismo día de la cita. Sin esperas, sin molestia adicional, con resultado definitivo.</p>
+            <h3>Programat S2 · Ivoclar</h3>
+            <p>Horno de alta velocidad para sinterización de zirconia. Ciclos express sin comprometer densidad ni color, ideales para prótesis de máxima resistencia.</p>
           </div>
         </article>
 
