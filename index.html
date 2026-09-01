@@ -1875,51 +1875,109 @@
     }
 
     /* ── EQUIPOS: cards con foto + descripción ── */
+    /* ── Galería equipos Opción 3 — columnas verticales ── */
     .equipo-tech-grid {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
       margin-top: 60px;
-    }
-    @media (min-width: 600px) {
-      .equipo-tech-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (min-width: 1025px) {
       .equipo-tech-grid { grid-template-columns: repeat(4, 1fr); }
     }
     .equipo-tech-card {
+      position: relative;
+      height: 520px;
+      overflow: hidden;
       background: var(--dark2);
-      overflow: hidden;
-      border-top: 2px solid transparent;
-      transition: var(--transition);
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.34,1.2,0.64,1);
     }
-    .equipo-tech-card:hover { border-top-color: var(--gold); }
+    @media (max-width: 768px) {
+      .equipo-tech-card { height: 360px; }
+    }
+    .equipo-tech-card:hover { transform: scale(1.02) translateY(-6px); z-index: 2; }
+
+    /* línea dorada lateral */
+    .equipo-tech-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 0;
+      background: var(--gold);
+      transition: height 0.5s ease;
+      z-index: 3;
+    }
+    .equipo-tech-card:hover::before { height: 100%; }
+
     .equipo-tech-photo {
-      aspect-ratio: 4/3;
-      overflow: hidden;
+      position: absolute;
+      inset: 0;
     }
     .equipo-tech-photo img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      object-position: center 30%;
       display: block;
-      transition: transform 0.5s ease;
+      transition: transform 0.6s ease, opacity 0.4s;
+      background: var(--dark2);
     }
     .equipo-tech-card:hover .equipo-tech-photo img { transform: scale(1.04); }
+
+    /* overlay gradiente inferior */
+    .equipo-tech-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(18,18,16,1) 0%, rgba(18,18,16,0.5) 45%, transparent 100%);
+      z-index: 1;
+    }
     .equipo-tech-body {
-      padding: 20px 22px 24px;
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 80px 22px 26px;
+      z-index: 2;
+    }
+    .equipo-tech-brand {
+      font-size: 0.52rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+      display: block;
     }
     .equipo-tech-body h3 {
       font-family: var(--font-serif);
-      font-size: 1rem;
-      font-weight: 500;
+      font-size: 1.1rem;
+      font-weight: 400;
       color: var(--white);
-      margin-bottom: 8px;
+      line-height: 1.25;
+      margin-bottom: 14px;
     }
-    .equipo-tech-body p {
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.45);
-      line-height: 1.7;
+    .equipo-tech-specs {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s ease, opacity 0.4s;
+      opacity: 0;
+    }
+    .equipo-tech-card:hover .equipo-tech-specs { max-height: 120px; opacity: 1; }
+    .equipo-tech-spec {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.65rem;
+      color: rgba(245,227,216,0.55);
+      line-height: 1.4;
+    }
+    .equipo-tech-spec::before {
+      content: '';
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
     }
 
     /* ══ CRO 1 — HERO SOCIAL PROOF POD ══
@@ -2605,44 +2663,68 @@
         <!-- PrograMill PM7 -->
         <article class="equipo-tech-card fade-up">
           <div class="equipo-tech-photo">
-            <img src="assets/PrograMill-PM7-Ivoclar.png" alt="Fresadora CAD/CAM PrograMill PM7 Ivoclar — Clínica SIMEB Bogotá" width="400" height="300" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <img src="assets/PrograMill-PM7-Ivoclar.png" alt="Fresadora CAD/CAM PrograMill PM7 Ivoclar — Clínica SIMEB Bogotá" width="400" height="600" loading="lazy" decoding="async">
           </div>
+          <div class="equipo-tech-overlay"></div>
           <div class="equipo-tech-body">
-            <h3>PrograMill PM7 · Ivoclar</h3>
-            <p>Fresadora CAD/CAM de 5 ejes con precisión de ±5 µm. Fabrica coronas, carillas e inlays de IPS e.max el mismo día de la cita, sin laboratorio externo.</p>
+            <span class="equipo-tech-brand">Ivoclar · CAD/CAM</span>
+            <h3>PrograMill PM7</h3>
+            <div class="equipo-tech-specs">
+              <span class="equipo-tech-spec">5 ejes de fresado</span>
+              <span class="equipo-tech-spec">Precisión ±5 µm</span>
+              <span class="equipo-tech-spec">Restauraciones el mismo día</span>
+            </div>
           </div>
         </article>
 
         <!-- TRIOS Core -->
         <article class="equipo-tech-card fade-up delay-1">
           <div class="equipo-tech-photo">
-            <img src="assets/TRIOS-Core-3Shape.avif" alt="Escáner intraoral TRIOS Core 3Shape — Clínica SIMEB Bogotá" width="400" height="300" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <img src="assets/TRIOS-Core-3Shape.avif" alt="Escáner intraoral TRIOS Core 3Shape — Clínica SIMEB Bogotá" width="400" height="600" loading="lazy" decoding="async">
           </div>
+          <div class="equipo-tech-overlay"></div>
           <div class="equipo-tech-body">
-            <h3>TRIOS Core · 3Shape</h3>
-            <p>Escáner intraoral sin polvo con captura de color en tiempo real. Impresiones digitales ultra-precisas en segundos para un flujo de trabajo 100% digital.</p>
+            <span class="equipo-tech-brand">3Shape · Digital</span>
+            <h3>TRIOS Core</h3>
+            <div class="equipo-tech-specs">
+              <span class="equipo-tech-spec">Sin polvo de contraste</span>
+              <span class="equipo-tech-spec">Captura de color HD</span>
+              <span class="equipo-tech-spec">Flujo 100% digital</span>
+            </div>
           </div>
         </article>
 
         <!-- Programat P510 -->
         <article class="equipo-tech-card fade-up delay-2">
           <div class="equipo-tech-photo">
-            <img src="assets/P510_Front_PS.jpg" alt="Horno de cerámica Programat P510 Ivoclar — Clínica SIMEB Bogotá" width="400" height="300" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <img src="assets/P510_Front_PS.jpg" alt="Horno de cerámica Programat P510 Ivoclar — Clínica SIMEB Bogotá" width="400" height="600" loading="lazy" decoding="async">
           </div>
+          <div class="equipo-tech-overlay"></div>
           <div class="equipo-tech-body">
-            <h3>Programat P510 · Ivoclar</h3>
-            <p>Horno de sinterización y cristalización de IPS e.max con hasta 950 °C. Garantiza la resistencia, translucidez y estética final de cada restauración cerámica.</p>
+            <span class="equipo-tech-brand">Ivoclar · Horneado</span>
+            <h3>Programat P510</h3>
+            <div class="equipo-tech-specs">
+              <span class="equipo-tech-spec">Hasta 950 °C</span>
+              <span class="equipo-tech-spec">Cristalización IPS e.max</span>
+              <span class="equipo-tech-spec">Control digital preciso</span>
+            </div>
           </div>
         </article>
 
         <!-- Programat S2 -->
         <article class="equipo-tech-card fade-up delay-3">
           <div class="equipo-tech-photo">
-            <img src="assets/Programat-S2-Ivoclar.jpg" alt="Horno de sinterización Programat S2 Ivoclar — Clínica SIMEB Bogotá" width="400" height="300" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;background:#f0f4f8;">
+            <img src="assets/Programat-S2-Ivoclar.jpg" alt="Horno de sinterización Programat S2 Ivoclar — Clínica SIMEB Bogotá" width="400" height="600" loading="lazy" decoding="async">
           </div>
+          <div class="equipo-tech-overlay"></div>
           <div class="equipo-tech-body">
-            <h3>Programat S2 · Ivoclar</h3>
-            <p>Horno de alta velocidad para sinterización de zirconia. Ciclos express sin comprometer densidad ni color, ideales para prótesis de máxima resistencia.</p>
+            <span class="equipo-tech-brand">Ivoclar · Sinterización</span>
+            <h3>Programat S2</h3>
+            <div class="equipo-tech-specs">
+              <span class="equipo-tech-spec">Sinterización veloz</span>
+              <span class="equipo-tech-spec">Zirconia alta densidad</span>
+              <span class="equipo-tech-spec">Ciclos express</span>
+            </div>
           </div>
         </article>
 
