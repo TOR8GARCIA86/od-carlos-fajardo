@@ -3392,11 +3392,36 @@
       }, 5000);
     })();
 
-    // ── Drag to scroll — galería equipos ──
+    // ── Galería equipos: auto-scroll en hover + drag ──
     (function() {
       const strip = document.getElementById('equipoStrip');
       if (!strip) return;
+
       let isDragging = false, startX, scrollLeft;
+      let autoScroll = null;
+      const SPEED = 1.2; // px por frame
+
+      function startAuto() {
+        if (autoScroll) return;
+        autoScroll = setInterval(() => {
+          if (isDragging) return;
+          // si llega al final, vuelve al inicio suavemente
+          if (strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 2) {
+            strip.scrollLeft = 0;
+          } else {
+            strip.scrollLeft += SPEED;
+          }
+        }, 16);
+      }
+      function stopAuto() {
+        clearInterval(autoScroll);
+        autoScroll = null;
+      }
+
+      strip.addEventListener('mouseenter', startAuto);
+      strip.addEventListener('mouseleave', stopAuto);
+
+      // Drag manual
       strip.addEventListener('mousedown', e => {
         isDragging = true;
         startX = e.pageX - strip.offsetLeft;
@@ -3407,10 +3432,13 @@
       strip.addEventListener('mousemove', e => {
         if (!isDragging) return;
         e.preventDefault();
-        strip.scrollLeft = scrollLeft - (e.pageX - strip.offsetLeft - startX) * 1.2;
+        strip.scrollLeft = scrollLeft - (e.pageX - strip.offsetLeft - startX) * 1.5;
       });
-      strip.addEventListener('touchstart', e => { startX = e.touches[0].pageX; scrollLeft = strip.scrollLeft; }, { passive: true });
+
+      // Touch
+      strip.addEventListener('touchstart', e => { startX = e.touches[0].pageX; scrollLeft = strip.scrollLeft; stopAuto(); }, { passive: true });
       strip.addEventListener('touchmove', e => { strip.scrollLeft = scrollLeft - (e.touches[0].pageX - startX); }, { passive: true });
+      strip.addEventListener('touchend', startAuto, { passive: true });
     })();
   </script>
 
