@@ -1884,18 +1884,6 @@
       user-select: none;
     }
     .equipo-tech-strip-outer:active { cursor: grabbing; }
-    /* desvanecer bordes */
-    .equipo-tech-strip-outer::before,
-    .equipo-tech-strip-outer::after {
-      content: '';
-      position: absolute;
-      top: 0; bottom: 0;
-      width: 80px;
-      z-index: 4;
-      pointer-events: none;
-    }
-    .equipo-tech-strip-outer::before { left: 0; background: linear-gradient(to right, var(--black), transparent); }
-    .equipo-tech-strip-outer::after  { right: 0; background: linear-gradient(to left, var(--black), transparent); }
 
     .equipo-tech-grid {
       display: flex;
