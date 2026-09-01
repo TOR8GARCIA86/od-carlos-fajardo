@@ -1556,7 +1556,7 @@
     .hero-title { font-size: clamp(2.2rem, 8vw, 4.5rem); }
 
     /* Grids: una columna en móvil */
-    .stats-grid { grid-template-columns: 1fr; gap: 20px; }
+    .stats-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
     .stat-item::after { display: none; }
     .services-header { flex-direction: column; gap: 20px; align-items: flex-start; text-align: left; }
     #servicios .section-tag { justify-content: flex-start; }
@@ -1575,6 +1575,18 @@
     .form-row { grid-template-columns: 1fr; }
     .footer-top { grid-template-columns: 1fr; gap: 36px; }
     .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+
+    /* Director: una columna en móvil */
+    .director-grid {
+      grid-template-columns: 1fr !important;
+      gap: 40px !important;
+      margin-top: 40px !important;
+    }
+    /* Award badges: wrap en móvil */
+    #equipo .director-badges { flex-wrap: wrap; gap: 12px !important; }
+
+    /* Galería equipos: cards más angostas en móvil */
+    .equipo-tech-card { width: 200px !important; height: 320px !important; }
 
     /* ── TABLET (≥ 600px) ── */
     @media (min-width: 600px) {
@@ -2518,7 +2530,7 @@
         por un <em>especialista de vocación</em>
       </h2>
 
-      <div style="display:grid; grid-template-columns:380px 1fr; gap:70px; align-items:center; margin-top:60px;">
+      <div class="director-grid" style="display:grid; grid-template-columns:380px 1fr; gap:70px; align-items:center; margin-top:60px;">
 
         <article class="team-card fade-up" itemscope itemtype="https://schema.org/Person" style="border-bottom:2px solid var(--gold);">
           <div class="team-card-photo">
@@ -3289,7 +3301,7 @@
         });
         statsObs.unobserve(e.target);
       });
-    }, { threshold: 0.4 });
+    }, { threshold: 0.1 });
     const statsBar = document.querySelector('.stats-bar');
     if (statsBar) statsObs.observe(statsBar);
 
