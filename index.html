@@ -1026,7 +1026,11 @@
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 3px;
-      background: var(--dark2);
+    }
+    .result-slot {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
     .result-before, .result-proceso, .result-after {
       background-color: var(--dark2);
@@ -1034,20 +1038,19 @@
       background-position: center top;
       background-repeat: no-repeat;
       aspect-ratio: 1/1;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      padding-bottom: 10px;
+      width: 100%;
     }
     .result-label {
-      font-size: 0.5rem;
+      font-size: 0.55rem;
       font-weight: 700;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      display: block;
     }
-    .result-proceso .result-label { color: var(--gold); }
-    .result-after .result-label { color: var(--wine); }
+    .result-label--proceso { color: var(--gold); }
+    .result-label--after { color: var(--wine); }
     .result-info {
       padding: 16px 0;
     }
@@ -2866,20 +2869,17 @@
       <div class="results-grid">
         <article class="result-card fade-up" aria-label="Caso: Diseño de Sonrisa Completo">
           <div class="result-card-inner">
-            <div class="result-before" role="img"
-                 style="background-image:url('assets/caso1-antes.jpg');"
-                 aria-label="Antes del diseño de sonrisa con carillas">
-              <span class="result-label" aria-hidden="true">Antes</span>
+            <div class="result-slot">
+              <div class="result-before" role="img" style="background-image:url('assets/caso1-antes.jpg');" aria-label="Antes del diseño de sonrisa"></div>
+              <span class="result-label">Antes</span>
             </div>
-            <div class="result-proceso" role="img"
-                 style="background-image:url('assets/caso1-proceso.jpg');"
-                 aria-label="Proceso clínico del diseño de sonrisa">
-              <span class="result-label" aria-hidden="true">Proceso</span>
+            <div class="result-slot">
+              <div class="result-proceso" role="img" style="background-image:url('assets/caso1-proceso.jpg');" aria-label="Proceso clínico"></div>
+              <span class="result-label result-label--proceso">Proceso</span>
             </div>
-            <div class="result-after" role="img"
-                 style="background-image:url('assets/caso1-despues.jpg');"
-                 aria-label="Después: sonrisa con carillas de porcelana feldespática">
-              <span class="result-label" aria-hidden="true">Después</span>
+            <div class="result-slot">
+              <div class="result-after" role="img" style="background-image:url('assets/caso1-despues.jpg');" aria-label="Resultado final con carillas"></div>
+              <span class="result-label result-label--after">Después</span>
             </div>
           </div>
           <div class="result-info">
@@ -2889,20 +2889,17 @@
         </article>
         <article class="result-card fade-up delay-1" aria-label="Caso: Rehabilitación con Implantes">
           <div class="result-card-inner">
-            <div class="result-before" role="img"
-                 style="background-image:url('assets/caso2-antes.jpg');"
-                 aria-label="Antes: paciente con pérdida dental">
-              <span class="result-label" aria-hidden="true">Antes</span>
+            <div class="result-slot">
+              <div class="result-before" role="img" style="background-image:url('assets/caso2-antes.jpg');" aria-label="Antes: pérdida dental"></div>
+              <span class="result-label">Antes</span>
             </div>
-            <div class="result-proceso" role="img"
-                 style="background-image:url('assets/caso2-proceso.jpg');"
-                 aria-label="Proceso de implantes dentales">
-              <span class="result-label" aria-hidden="true">Proceso</span>
+            <div class="result-slot">
+              <div class="result-proceso" role="img" style="background-image:url('assets/caso2-proceso.jpg');" aria-label="Proceso de implantes"></div>
+              <span class="result-label result-label--proceso">Proceso</span>
             </div>
-            <div class="result-after" role="img"
-                 style="background-image:url('assets/caso2-despues.jpg');"
-                 aria-label="Después: rehabilitación oral completa con implantes">
-              <span class="result-label" aria-hidden="true">Después</span>
+            <div class="result-slot">
+              <div class="result-after" role="img" style="background-image:url('assets/caso2-despues.jpg');" aria-label="Resultado con implantes"></div>
+              <span class="result-label result-label--after">Después</span>
             </div>
           </div>
           <div class="result-info">
