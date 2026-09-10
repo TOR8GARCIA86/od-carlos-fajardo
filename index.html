@@ -1024,26 +1024,28 @@
     }
     .result-card-inner {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 2px;
-      aspect-ratio: 4/3;
+      aspect-ratio: 3/2;
       background: var(--dark2);
     }
-    .result-before, .result-after {
+    .result-before, .result-proceso, .result-after {
       background: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 100%);
+      background-size: cover;
+      background-position: center;
       display: flex;
       align-items: flex-end;
       justify-content: center;
       padding-bottom: 12px;
     }
     .result-label {
-      font-size: 0.55rem;
+      font-size: 0.5rem;
       font-weight: 700;
       letter-spacing: 3px;
       text-transform: uppercase;
       color: rgba(255,255,255,0.4);
     }
-    /* "Después" usa vino: resultado = identidad de marca, no CTA */
+    .result-proceso .result-label { color: var(--gold); }
     .result-after .result-label { color: var(--wine); }
     .result-info {
       padding: 16px 0;
@@ -2864,13 +2866,17 @@
         <article class="result-card fade-up" aria-label="Caso: Diseño de Sonrisa Completo">
           <div class="result-card-inner">
             <div class="result-before" role="img"
-                 style="background-image:url('assets/caso1-antes.jpg'); background-size:cover; background-position:center;"
-                 aria-label="Antes: sonrisa del paciente antes del diseño de sonrisa con carillas">
+                 style="background-image:url('assets/caso1-antes.jpg');"
+                 aria-label="Antes del diseño de sonrisa con carillas">
               <span class="result-label" aria-hidden="true">Antes</span>
             </div>
+            <div class="result-proceso" role="img"
+                 aria-label="Proceso clínico del diseño de sonrisa">
+              <span class="result-label" aria-hidden="true">Proceso</span>
+            </div>
             <div class="result-after" role="img"
-                 style="background-image:url('assets/caso1-despues.jpg'); background-size:cover; background-position:center;"
-                 aria-label="Después: sonrisa con carillas de porcelana feldespática — Clínica SIMEB Bogotá">
+                 style="background-image:url('assets/caso1-despues.jpg');"
+                 aria-label="Después: sonrisa con carillas de porcelana feldespática">
               <span class="result-label" aria-hidden="true">Después</span>
             </div>
           </div>
@@ -2882,13 +2888,18 @@
         <article class="result-card fade-up delay-1" aria-label="Caso: Rehabilitación con Implantes">
           <div class="result-card-inner">
             <div class="result-before" role="img"
-                 style="background-image:url('assets/caso2-antes.jpg'); background-size:cover; background-position:center;"
-                 aria-label="Antes: paciente con pérdida dental antes de implantes All-on-4">
+                 style="background-image:url('assets/caso2-antes.jpg');"
+                 aria-label="Antes: paciente con pérdida dental">
               <span class="result-label" aria-hidden="true">Antes</span>
             </div>
+            <div class="result-proceso" role="img"
+                 style="background-image:url('assets/caso2-proceso.jpg');"
+                 aria-label="Proceso de implantes dentales">
+              <span class="result-label" aria-hidden="true">Proceso</span>
+            </div>
             <div class="result-after" role="img"
-                 style="background-image:url('assets/caso2-despues.jpg'); background-size:cover; background-position:center;"
-                 aria-label="Después: rehabilitación oral completa con implantes dentales All-on-4 — Dr. Fajardo Bogotá">
+                 style="background-image:url('assets/caso2-despues.jpg');"
+                 aria-label="Después: rehabilitación oral completa con implantes">
               <span class="result-label" aria-hidden="true">Después</span>
             </div>
           </div>
@@ -2900,11 +2911,15 @@
         <article class="result-card fade-up delay-2" aria-label="Caso: Blanqueamiento y Carillas">
           <div class="result-card-inner">
             <div class="result-before" role="img"
-                 aria-label="Antes: dientes con pigmentación antes de blanqueamiento dental profesional">
+                 aria-label="Antes: dientes con pigmentación">
               <span class="result-label" aria-hidden="true">Antes</span>
             </div>
+            <div class="result-proceso" role="img"
+                 aria-label="Proceso de blanqueamiento dental">
+              <span class="result-label" aria-hidden="true">Proceso</span>
+            </div>
             <div class="result-after" role="img"
-                 aria-label="Después: blanqueamiento dental LED más carillas de porcelana — resultado natural — Bogotá">
+                 aria-label="Después: resultado natural con blanqueamiento y carillas">
               <span class="result-label" aria-hidden="true">Después</span>
             </div>
           </div>
