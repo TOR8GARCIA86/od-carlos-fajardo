@@ -3094,7 +3094,12 @@
             </p>
           </div>
 
-          <form action="#" method="POST" onsubmit="handleForm(event)">
+          <form id="contactForm" onsubmit="handleForm(event)">
+            <!-- Web3Forms: reemplazar WEB3FORMS_ACCESS_KEY con la clave de web3forms.com -->
+            <input type="hidden" name="access_key" value="WEB3FORMS_ACCESS_KEY">
+            <input type="hidden" name="subject" value="Nueva consulta — OD. Carlos Fajardo SIMEB">
+            <input type="hidden" name="from_name" value="Web SIMEB">
+            <input type="hidden" name="redirect" value="gracias.html">
             <div class="form-row">
               <div class="form-group">
                 <label for="nombre">Nombre *</label>
@@ -3126,7 +3131,7 @@
               <label for="mensaje">Cuéntenos más (opcional)</label>
               <textarea id="mensaje" name="mensaje" placeholder="Describa brevemente su caso o inquietud..."></textarea>
             </div>
-            <button type="submit" class="form-submit">Solicitar Mi Consulta</button>
+            <button type="submit" class="form-submit" id="btn-form-submit">Solicitar Mi Consulta</button>
           </form>
         </div>
       </div>
@@ -3340,24 +3345,35 @@
     }
 
     // ══ 8. FORMULARIO → WhatsApp ══
-    function handleForm(e) {
+    async function handleForm(e) {
       e.preventDefault();
-      const btn = e.target.querySelector('.form-submit');
+      const form = e.target;
+      const btn  = form.querySelector('.form-submit');
       const nombre   = document.getElementById('nombre').value.trim();
       const telefono = document.getElementById('telefono').value.trim();
-      const servicio = document.getElementById('servicio').value;
-      const msg = encodeURIComponent(
-        `Hola Dr. Fajardo, soy ${nombre}. ` +
-        `Me interesa agendar una consulta${servicio ? ' sobre ' + servicio : ''}. ` +
-        `Mi teléfono es ${telefono}.`
-      );
-      btn.textContent = 'Abriendo WhatsApp…';
+      if (!nombre || !telefono) return;
+
+      btn.textContent = 'Enviando…';
       btn.disabled = true;
-      setTimeout(() => {
-        window.open(`https://wa.me/573103220629?text=${msg}`, '_blank', 'noopener');
-        btn.textContent = 'Solicitar Mi Consulta';
+
+      try {
+        const data = new FormData(form);
+        const res  = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: data
+        });
+        const json = await res.json();
+        if (json.success) {
+          btn.textContent = '¡Consulta Enviada!';
+          form.reset();
+          setTimeout(() => { btn.textContent = 'Solicitar Mi Consulta'; btn.disabled = false; }, 3000);
+        } else {
+          throw new Error('Error');
+        }
+      } catch {
+        btn.textContent = 'Error — intente de nuevo';
         btn.disabled = false;
-      }, 600);
+      }
     }
 
     // ══ 9. STICKY BAR — se oculta cuando el formulario es visible ══
